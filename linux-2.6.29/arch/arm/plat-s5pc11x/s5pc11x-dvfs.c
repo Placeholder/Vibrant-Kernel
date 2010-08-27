@@ -649,7 +649,7 @@ void s5pc11x_cpufreq_powersave(struct early_suspend *h)
 {
 	//unsigned long irqflags;
 	//spin_lock_irqsave(&g_cpufreq_lock, irqflags);
-	s5pc11x_cpufreq_level = S5PC11X_MAXFREQLEVEL + 2;
+	s5pc11x_cpufreq_level = S5PC11X_MAXFREQLEVEL;
 	//spin_unlock_irqrestore(&g_cpufreq_lock, irqflags);
 	return;
 }
@@ -659,8 +659,8 @@ void s5pc11x_cpufreq_performance(struct early_suspend *h)
 	//unsigned long irqflags;
 	if(!is_userspace_gov()) {
 		//spin_lock_irqsave(&g_cpufreq_lock, irqflags);
-		s5pc11x_cpufreq_level = S5PC11X_MAXFREQLEVEL;
-		s5pc11x_cpufreq_index = CLIP_LEVEL(s5pc11x_cpufreq_index, S5PC11X_MAXFREQLEVEL);
+		s5pc11x_cpufreq_level = 0;
+		s5pc11x_cpufreq_index = 0;
 		//spin_unlock_irqrestore(&g_cpufreq_lock, irqflags);
 		s5pc110_target(NULL, s5pc110_freq_table[S5PC11X_FREQ_TAB][s5pc11x_cpufreq_index].frequency, 1);
 	}
